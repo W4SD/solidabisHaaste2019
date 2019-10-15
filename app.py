@@ -1,4 +1,5 @@
 from flask import Flask
+from unlock_secrets import all_the_shit
 
 app = Flask(__name__)
 
