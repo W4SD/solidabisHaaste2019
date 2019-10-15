@@ -11,3 +11,5 @@ if get_shit.status_code == 200:
         all_the_shit.append(msg['message'].lower())
 else:
     print("Cant do shit!")
+
+print(all_the_shit[30:35])

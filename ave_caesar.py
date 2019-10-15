@@ -1,4 +1,4 @@
-#from unlock_secrets import all_the_shit
+from unlock_secrets import all_the_shit
 
 
 '''
@@ -22,7 +22,22 @@ def oumls(asciiValue):
 
     return ouml.get(asciiValue)
 
-noOfLetters = 28
+noOfLetters = 29
+result = ""
+key = 'abcdefghijklmnopqrstuvwxyzåäö'
+
+def decrypt(n, ciphertext):
+    """Decrypt the string and return the plaintext"""
+    result = ''
+
+    for l in ciphertext:
+        try:
+            i = (key.index(l) - n) % noOfLetters
+            result += key[i]
+        except ValueError:
+            result += l
+
+    return result
 
 def crack_ceaser(msg):
 
@@ -56,7 +71,7 @@ def crack_ceaser(msg):
             letterCount[posInAlphabet] += 1
 
     letterFreq = letterCount.copy()
-    print (letterFreq)
+    #print (letterFreq)
 
     for offSet in range(noOfLetters):
 
@@ -65,15 +80,30 @@ def crack_ceaser(msg):
             if (max < letterFreq[offSet]):
                 max = letterFreq[offSet]
 
-    print (letterFreq)
+    #print (letterFreq)
+    #print ("ans?: ", letterFreq.index(max))
+    #print (((noOfLetters - letterFreq.index(max)) % noOfLetters))
 
-    return max
+    return decrypt(letterFreq.index(max), msg)
 
+for msg in all_the_shit:
+    print(crack_ceaser(msg))
 
+'''
 print("Round 1: ")
-print(crack_ceaser("aaaaaa bbbbb cccc ddd ee f g åå ää öö"))
+msg1 = "Dpygyp gzaöxåäayp aö påzghxxzaefp ftwskö töögefttö ägzppö åghpeep ztezxhxxzazex zppzaeep exypxfethxxö äppzgöfxxö."
+print(crack_ceaser(msg1))
 print("round 2:")
-print(crack_ceaser("Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv"))
+print(crack_ceaser("Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä."))
+print("round 3:")
+print(crack_ceaser("jsjod qvöwbj smev anrh tyäwlyo moeo eifgänicmnx noceä rsxaxwg nicpäcexm."))
+print("round 4:")
+print(crack_ceaser("ix ed eäaxtijä fkkijt ckejeäbjk aodjjäbrdötbat ckjjt däcxdir xiädx ed ittdkj åxhaakftbtt ckäijkjjtltijt ckeweijt."))
+print("round 5:")
+print(crack_ceaser("rol lmnwduwgw åb gl ibwnmld eghwo hblhbmewo daå bwdglmhgfw ggwgbe."))
+'''
+
+
 
 
 
