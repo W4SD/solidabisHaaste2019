@@ -1,4 +1,4 @@
-from unlock_secrets import all_the_shit
+#from unlock_secrets import all_the_shit
 
 
 '''
@@ -22,7 +22,7 @@ def oumls(asciiValue):
 
     return ouml.get(asciiValue)
 
-noOfLetters = 29
+noOfLetters = 28
 
 def crack_ceaser(msg):
 
@@ -49,28 +49,30 @@ def crack_ceaser(msg):
         if ord(char) > 227:
             posInAlphabet = oumls(ord(char))
         else:
+            # 97 = ascii code for a
             posInAlphabet = (ord(char) | 32) - 97
 
         if 0 <= posInAlphabet and posInAlphabet < noOfLetters:
             letterCount[posInAlphabet] += 1
 
-    letterFreq = letterCount
+    letterFreq = letterCount.copy()
     print (letterFreq)
-    '''
+
     for offSet in range(noOfLetters):
 
         for currLetter in range(noOfLetters):
-            letterFreq[offSet] += (0.01 * letterCount[currLetter] * weight[(currLetter + offSet % noOfLetters)])
+            letterFreq[offSet] += (0.01 * letterCount[currLetter] * weight[((currLetter + offSet) % noOfLetters)])
             if (max < letterFreq[offSet]):
                 max = letterFreq[offSet]
 
-    '''
-    print (letterCount)
-    print (max)
+    print (letterFreq)
 
     return max
 
+
+print("Round 1: ")
 print(crack_ceaser("aaaaaa bbbbb cccc ddd ee f g åå ää öö"))
+print("round 2:")
 print(crack_ceaser("Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv"))
 
 
