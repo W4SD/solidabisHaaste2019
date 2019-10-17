@@ -1,5 +1,5 @@
 from unlock_secrets import all_the_shit
-
+import ngram_score as ns
 
 '''
 A : 12.22        K :  4.97        U :  5.01
@@ -81,48 +81,23 @@ def crack_ceaser(msg):
                 max = letterFreq[offSet]
 
     #print (letterFreq)
-    #print ("ans?: ", letterFreq.index(max))
+    #print (letterCount)
+    print ("ans?: ", letterFreq.index(max))
     #print (((noOfLetters - letterFreq.index(max)) % noOfLetters))
 
     return decrypt(letterFreq.index(max), msg)
 
+fitness = ns.ngram_score('finnish_quadgrams.txt')
+
 for msg in all_the_shit:
-    print(crack_ceaser(msg))
+    decMsg = crack_ceaser(msg)
+    print("fitness unDec: ", fitness.score(msg))
+    print("fitness: ", fitness.score(decMsg))
+    print(decMsg)
 
-'''
-print("Round 1: ")
-msg1 = "Dpygyp gzaöxåäayp aö påzghxxzaefp ftwskö töögefttö ägzppö åghpeep ztezxhxxzazex zppzaeep exypxfethxxö äppzgöfxxö."
-print(crack_ceaser(msg1))
-print("round 2:")
-print(crack_ceaser("Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä."))
-print("round 3:")
-print(crack_ceaser("jsjod qvöwbj smev anrh tyäwlyo moeo eifgänicmnx noceä rsxaxwg nicpäcexm."))
-print("round 4:")
-print(crack_ceaser("ix ed eäaxtijä fkkijt ckejeäbjk aodjjäbrdötbat ckjjt däcxdir xiädx ed ittdkj åxhaakftbtt ckäijkjjtltijt ckeweijt."))
-print("round 5:")
-print(crack_ceaser("rol lmnwduwgw åb gl ibwnmld eghwo hblhbmewo daå bwdglmhgfw ggwgbe."))
-'''
+
+#print(crack_ceaser("Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä."))
 
 
 
-
-
-'''
-<?php
-
-function crack_caesar($str) {
-
-	for ($off = 0; $off < 26; ++$off) {
-
-		for ($i = 0; $i < 26; ++$i) {
-			if ($max < ($s[$off]+= 0.01 * $c[$i] * $weight[($i + $off) % 26])) {
-				$max = $s[$off];
-			}
-		}
-	}
-	return (26 - array_search($max, $s)) % 26;
-}
-
-?>
-'''
 
