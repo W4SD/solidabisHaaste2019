@@ -1,18 +1,22 @@
 import re
-from ngram_score import ngram_score
+import sys
 
-fitness = ngram_score('finnish_trigrams.txt')  # load our quadgram statistics
-from pycipher import Caesar
+sys.path.append('/pycipherMod/')
+
+from ngramscore import NgramScore
+from pycipherMod import Caesar
+
+fitness = NgramScore('finnish_trigrams.txt')  # load our quadgram statistics
 
 
-def break_caesar(ctext):
+def break_caesar(crypted_text):
     # make sure ciphertext has all spacing/punc removed and is uppercase
-    #ctext = re.sub('[^A-Ö]', '', ctext.upper())
-    print(ctext)
+    # ctext = re.sub('[^A-Ö]', '', ctext.upper())
+    print(crypted_text)
     # try all possible keys, return the one with the highest fitness
     scores = []
     for i in range(29):
-        scores.append((fitness.score(Caesar(i).decipher(ctext)), i))
+        scores.append((fitness.score(Caesar(i).decipher(crypted_text)), i))
     print("max value: ", max(scores))
     print(scores)
     return max(scores)
