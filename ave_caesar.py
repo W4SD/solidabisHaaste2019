@@ -117,7 +117,7 @@ for msg in all_the_shit:
     # print("Differences = ", abs(origScore) - abs(diyScore), " / ", abs(origScore) - abs(pyModScore))
     # print("--- DONE! ---")
 
-    if (abs(origScore) - abs(pyModScore) > 120):
+    if (abs(origScore) - abs(pyModScore) < 170):
         print("fitness unDec: ", origScore)
         print(msg)
         print("fitness diy: ", diyScore)
@@ -129,5 +129,7 @@ for msg in all_the_shit:
         hits += 1
 
 print("Hits: ", hits)
+
+# pituuden vaikutus pisteisiin ?
 
 # print(crack_ceaser("Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä."))
