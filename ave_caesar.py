@@ -1,5 +1,7 @@
 from unlock_secrets import all_the_shit
 import ngramscore as ns
+from pycipherMod import Caesar
+from break_caesar import break_caesar
 
 '''
 A : 12.22        K :  4.97        U :  5.01
@@ -87,25 +89,45 @@ def crack_ceaser(curr_msg):
 
     # print (letterFreq)
     # print (letterCount)
-    print("ans?: ", letterFreq.index(max_value))
+    # print("ans?: ", letterFreq.index(max_value))
     # print (((noOfLetters - letterFreq.index(max_value)) % noOfLetters))
 
     return decrypt(letterFreq.index(max_value), curr_msg)
 
 
 fitness = ns.NgramScore('finnish_quadgrams.txt')
+"""
+ctext = 'Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä'
+crack_ceaser(ctext)
+"""
+hits = 0
 
 for msg in all_the_shit:
-    print(msg)
+    origScore = fitness.score(msg)
+    # print("fitness unDec: ", origScore)
+    # print(msg)
     decMsg = crack_ceaser(msg)
-    print("fitness unDec: ", fitness.score(msg))
-    print("fitness: ", fitness.score(decMsg))
-    print(decMsg)
-    print("DONE!")
+    decMsg2 = Caesar(break_caesar(msg)[1]).decipher(msg, True)
+    diyScore = fitness.score(decMsg)
+    # print("fitness diy: ", diyScore)
+    # print(decMsg)
+    pyModScore = fitness.score(decMsg2)
+    # print("fitness pyMod: ", pyModScore)
+    # print(decMsg2)
+    # print("Differences = ", abs(origScore) - abs(diyScore), " / ", abs(origScore) - abs(pyModScore))
+    # print("--- DONE! ---")
 
+    if (abs(origScore) - abs(pyModScore) > 120):
+        print("fitness unDec: ", origScore)
+        print(msg)
+        print("fitness diy: ", diyScore)
+        print(decMsg)
+        print("fitness pyMod: ", pyModScore)
+        print(decMsg2)
+        print("Differences = ", abs(origScore) - abs(diyScore), " / ", abs(origScore) - abs(pyModScore))
+        print("--- DONE! ---")
+        hits += 1
+
+print("Hits: ", hits)
 
 # print(crack_ceaser("Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä."))
-
-
-
-

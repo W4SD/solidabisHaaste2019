@@ -32,6 +32,7 @@ class NgramScore(object):
         return score
 
 
+"""
 # ns_fitness = NgramScore('finnish_monograms.txt')
 ns_fitness = NgramScore('finnish_quadgrams.txt')
 # ns_fitness = NgramScore('english_quadgrams.txt')
@@ -39,4 +40,4 @@ uncrypted = 'köunidm oöqjdsdhkkö nm jåxsx oxäqågsdkdlårrå dmshrså köö
 test_message = 'lavojen parketeilla on käyty pyörähtelemässä entistä laajemmalta alueelta ja tanssijoiden joukossa on ollut aiempaa enemmän nuorempaa polvea.'
 print(ns_fitness.score(test_message))
 print(ns_fitness.score(uncrypted))
-
+"""
