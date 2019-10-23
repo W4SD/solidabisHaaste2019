@@ -8,7 +8,6 @@ get_shit = requests.get(secret_url['bullshitUrl'], headers={'Authorization': sec
 if get_shit.status_code == 200:
     print("Getting shit done!")
     for msg in get_shit.json()['bullshits']:
-        print(msg['message'])
-        all_the_shit.append(msg['message'])
+        all_the_shit.append(msg['message'].lower())
 else:
     print("Cant do shit!")
