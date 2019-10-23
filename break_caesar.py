@@ -6,7 +6,7 @@ sys.path.append('/pycipherMod/')
 from ngramscore import NgramScore
 from pycipherMod import Caesar
 
-fitness = NgramScore('finnish_quadgrams.txt')  # load our quadgram statistics
+fitness = NgramScore('finnish_monograms.txt')  # load our quadgram statistics
 
 
 def break_caesar(crypted_text):

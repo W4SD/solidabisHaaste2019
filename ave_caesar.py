@@ -95,7 +95,8 @@ def crack_ceaser(curr_msg):
     return decrypt(letterFreq.index(max_value), curr_msg)
 
 
-fitness = ns.NgramScore('finnish_quadgrams.txt')
+mono_ns = ns.NgramScore('finnish_monograms.txt')
+quad_ns = ns.NgramScore('finnish_quadgrams.txt')
 """
 ctext = 'Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä'
 crack_ceaser(ctext)
@@ -103,33 +104,36 @@ crack_ceaser(ctext)
 hits = 0
 
 for msg in all_the_shit:
-    origScore = fitness.score(msg)
+    origScore_mono = mono_ns.score(msg)
+    origScore_quad = quad_ns.score(msg)
     # print("fitness unDec: ", origScore)
     # print(msg)
-    decMsg = crack_ceaser(msg)
+    # decMsg = crack_ceaser(msg)
     decMsg2 = Caesar(break_caesar(msg)[1]).decipher(msg, True)
-    diyScore = fitness.score(decMsg)
+    # diyScore = fitness.score(decMsg)
     # print("fitness diy: ", diyScore)
     # print(decMsg)
-    pyModScore = fitness.score(decMsg2)
+    pyModScore = mono_ns.score(decMsg2)
+    decMsg_score_quad = quad_ns.score(decMsg2)
     # print("fitness pyMod: ", pyModScore)
     # print(decMsg2)
     # print("Differences = ", abs(origScore) - abs(diyScore), " / ", abs(origScore) - abs(pyModScore))
     # print("--- DONE! ---")
+    diffPercent = abs(pyModScore) / abs(origScore_mono) * 100
 
-    if (abs(origScore) - abs(pyModScore) < 170):
-        print("fitness unDec: ", origScore)
+    if (90 > diffPercent > 80):
+        print("diff percent: ", round(diffPercent, 2), "%")
+        print("fitness unDec: ", origScore_mono)
         print(msg)
-        print("fitness diy: ", diyScore)
-        print(decMsg)
         print("fitness pyMod: ", pyModScore)
         print(decMsg2)
-        print("Differences = ", abs(origScore) - abs(diyScore), " / ", abs(origScore) - abs(pyModScore))
+        print("Orig - Dec = ", abs(origScore_mono) - abs(pyModScore))
+        print("QuadScore Orig / Dec / Diff ", origScore_quad, " / ", decMsg_score_quad, " / ", round(abs(decMsg_score_quad) / abs(origScore_quad) * 100, 2), "%")
         print("--- DONE! ---")
         hits += 1
 
 print("Hits: ", hits)
 
 # pituuden vaikutus pisteisiin ?
-
+# prosentti ero ? MONO < 90% QUAD <80&
 # print(crack_ceaser("Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä."))
