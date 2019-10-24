@@ -35,5 +35,12 @@ Diy results are correct about 50/50
 |  |  |
 |  |  |
 
+diff percent:  18.44 %
+yzsöuovstka ycka ksxyk srwsöäfrwi tyxuk yvoaoakkx ovicix covkuös tk uifcix csovi ajsööi vywkvvk.
+OPISKELIJAT OVAT AINOA IHMISRYHMÄ JONKA OLETETAAN ELÄVÄN VELAKSI JA KÄYVÄN VIELÄ TÖISSÄ LOMALLA.
+QuadScore Diff  23.82 %
+--- DONE! ---
+
+
 
 

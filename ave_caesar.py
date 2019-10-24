@@ -1,4 +1,4 @@
-from unlock_secrets import all_the_shit
+# from unlock_secrets import all_the_shit
 import ngramscore as ns
 from pycipherMod import Caesar
 from break_caesar import break_caesar
@@ -15,6 +15,10 @@ H :  1.85        R :  2.87        Ä :  3.58
 I : 10.82        S :  7.86        Ö :  0.44
 J :  2.04        T :  8.75   
 '''
+all_the_shit = []
+with open('messages.txt', 'r') as f:
+    for line in f:
+        all_the_shit.append(line.strip("\n"))
 
 
 def oumls(ascii_value):
@@ -95,7 +99,7 @@ def crack_ceaser(curr_msg):
     return decrypt(letterFreq.index(max_value), curr_msg)
 
 
-mono_ns = ns.NgramScore('finnish_monograms.txt')
+mono_ns = ns.NgramScore('finnish_bigrams.txt')
 quad_ns = ns.NgramScore('finnish_quadgrams.txt')
 """
 ctext = 'Aivpi rövisitöåäw iqpmöääii vqqv awquisiåäi uiixmzgv ägzqvgg määg tgpqitömmv sqqvämqåährmv åmqvgä pitsmqtmaiä'
@@ -119,20 +123,25 @@ for msg in all_the_shit:
     # print(decMsg2)
     # print("Differences = ", abs(origScore) - abs(diyScore), " / ", abs(origScore) - abs(pyModScore))
     # print("--- DONE! ---")
-    diffPercent = abs(pyModScore) / abs(origScore_mono) * 100
+    diffPercent = round(100 - (abs(pyModScore) / abs(origScore_mono) * 100), 2)
+    diffPercent2 = round(100 - (abs(decMsg_score_quad) / abs(origScore_quad) * 100), 2)
+    difference = round(diffPercent2 - diffPercent, 2)
 
-    if (90 > diffPercent > 80):
-        print("diff percent: ", round(diffPercent, 2), "%")
-        print("fitness unDec: ", origScore_mono)
+    if (17 < diffPercent < diffPercent2 and difference < 2.5):
+        print("diff percent: ", diffPercent, "%")
+        print("difference: ", difference, "%")
+        #print("fitness unDec: ", origScore_mono)
         print(msg)
-        print("fitness pyMod: ", pyModScore)
+        #print("fitness pyMod: ", pyModScore)
         print(decMsg2)
-        print("Orig - Dec = ", abs(origScore_mono) - abs(pyModScore))
-        print("QuadScore Orig / Dec / Diff ", origScore_quad, " / ", decMsg_score_quad, " / ", round(abs(decMsg_score_quad) / abs(origScore_quad) * 100, 2), "%")
+        #print("Orig - Dec = ", abs(origScore_mono) - abs(pyModScore))
+        #print("QuadScore Orig / Dec / Diff ", origScore_quad, " / ", decMsg_score_quad, " / ", round(100 - (abs(decMsg_score_quad) / abs(origScore_quad) * 100), 2), "%")
+        print("QuadScore Diff ", diffPercent2, "%")
         print("--- DONE! ---")
         hits += 1
 
 print("Hits: ", hits)
+
 
 # pituuden vaikutus pisteisiin ?
 # prosentti ero ? MONO < 90% QUAD <80&
