@@ -10,3 +10,7 @@ Sinun tulee luoda web-käyttöliittymä, joka näyttää lauseet jaoteltuina No 
 Et saa käyttää mitään kolmannen osapuolen palvelua tai kirjastoa, joka tunnistaa kielen automaattisesti. Tekstiaineistojen, kuten sanakirjan käyttö on kuitenkin sallittua, joskin annamme lisäpisteitä ratkaisuista, jotka eivät tukeudu valmiisiin aineistoihin.
 
 Toteutukseen käytettävät teknologiat ovat vapaasti päätettävissäsi.
+
+
+### Totetus
+Python + Flask kikkana joka noutaa viestit solidabiksen apilta -> käsittely ja siitä sitten frontille pusku.
