@@ -16,4 +16,5 @@ Toteutukseen käytettävät teknologiat ovat vapaasti päätettävissäsi.
 Python + Flask kikkana joka noutaa viestit solidabiksen apilta -> käsittely ja siitä sitten frontille pusku.
 
 @ToDo: Kielen tunnistaminen hyvällä varmuudella - Gibberish vs Suomi
+
 @ToDo: Frontin rakennus
